@@ -1,3 +1,9 @@
+# Project-specific (secrets / runtime)
+public/data/oauth_gmail.json
+public/data/token_gmail.json
+public/data/*.csv
+public/data/*.log
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

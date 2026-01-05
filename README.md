@@ -7,6 +7,22 @@ extracts job titles and URLs from the HTML body,
 and exports them as CSV files for downstream processing
 such as scraping or analysis.
 
+## Why this exists
+- **Problem:** Job notification emails contain useful links, but copying titles/URLs by hand is slow and error-prone.
+- **Goal:** Use Gmail as an entry point to automatically fetch emails from specific senders, extract job titles + URLs from the HTML body, and export a CSV for downstream scraping/analysis.
+- **Output:** A cleaned CSV dataset (date/title/url + extra columns for the next scraping step).
+
+## Constraints / Trade-offs
+- **Sender-specific parsing:** Extraction logic is tailored to specific senders (currently `freelancer`). Adding new senders requires implementing a new contents extractor.
+- **Credentials not included:** OAuth client secrets and user tokens are not shipped with this repository. You must create your own Google Cloud OAuth credentials and place them in the expected paths.
+- **Minimal hardening:** Retries and error handling are intentionally minimal. Gmail API quota limits or auth issues may require manual intervention.
+- **Code-based configuration:** Query conditions and fetch count are set in code (no CLI/config switching yet).
+
+## Next improvements (planned)
+- Add a sender plugin interface (e.g., `UpworkContents`, `IndeedContents`) to reduce coupling.
+- Add a simple config layer (env/JSON) for query and fetch count.
+- Add an “extract-only” mode to re-run cleansing without re-fetching emails. 
+
 
 ## How to Run
 For execution instructions, see:
